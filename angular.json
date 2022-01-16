@@ -108,6 +108,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "AngularVideoFM:build:production",
+            "firebaseProject": "fernando-cda05",
+            "firebaseHostingSite": "fernando-cda05"
+          }
         }
       }
     }

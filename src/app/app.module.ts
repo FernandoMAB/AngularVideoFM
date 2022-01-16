@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 
-//import { AngularFireModule } from '@angular/fire/compat';
-//import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -34,8 +34,9 @@ import { FiltroComponent } from './filtro/filtro.component';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    //AngularFireModule.initializeApp(environment.firebase),
-    //AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fernando-cda05": {
+      "hosting": {
+        "AngularVideoFM": [
+          "fernando-cda05"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fernando-cda05"
+  }
+}
