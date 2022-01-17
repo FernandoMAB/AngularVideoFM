@@ -44,11 +44,10 @@ export class FiltroComponent implements OnInit {
 
         this.equiposArray.forEach(elementE => {
 
-          if(element.equipo == elementE.id){
+          if(element.equipo == elementE.id && element.fechaIni >= this.multas.value.StartDate && element.fechaFin <= this.multas.value.EndDate && element.estado == 'Prestado'){
 
             var diff = this.calcularDias(element.fechaFin,todayDate);
             var multaCalculada = diff * this.multaPorDia;
-
             if(diff > 0){
               this.multasArray.push({
                 equipo: elementE.nombre,
@@ -67,10 +66,15 @@ export class FiltroComponent implements OnInit {
   }
 
   calcularDias(finPrestamo:Date,hoy:Date){
-    
+    //console.log('Calcular dias');
     let days = hoy.getTime() - finPrestamo.getTime();
+    //console.log(hoy.getTime());
+    //console.log(finPrestamo.getTime());
+    //console.log(days);
     days = days/(1000*60*60*24);
-    let diferenciaDias = days.toFixed(0);
+    //console.log(days);
+
+    let diferenciaDias = Math.trunc(days);
     return Number(diferenciaDias);
   }
   
