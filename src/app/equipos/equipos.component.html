@@ -1,1 +1,43 @@
 <app-navbar></app-navbar>
+<div class="demo-button-container">
+    <div>
+      <h2 class="text-center">
+        <strong>
+          Lista de Equipos
+        </strong>
+        </h2>
+    </div>
+      <button mat-stroked-button color="primary" class="demo-button" routerLink="/create-equipo" title="Ingresar un nuevo empleado">
+        Ingresar un equipo
+      </button>
+    </div>
+  <h3 *ngIf="equiposArray.length==0" class="align">No existen equipos registados</h3>
+  <mat-table *ngIf="equiposArray.length>0" [dataSource]="equiposArray" class="mat-elevation-z8">
+      <!-- First Name Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+        <mat-cell *matCellDef="let equipo"> {{equipo.id}} </mat-cell>
+      </ng-container>
+    
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del Equipo </mat-header-cell>
+        <mat-cell *matCellDef="let equipo"> {{equipo.nombre}} </mat-cell>
+      </ng-container>
+    
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
+          <mat-cell class="example-button-row" *matCellDef="let equipo"> 
+              <button mat-raised-button color="primary"  [routerLink] = "['/edit-equipo/',equipo.id]" title="Editar">
+                  <mat-icon >edit</mat-icon>
+                  </button>
+              <button (click)="deleteEquipo(equipo.id)" mat-raised-button color="warn" title="Eliminar">
+                  <mat-icon>delete</mat-icon>
+                  </button>  
+          </mat-cell>
+        </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>

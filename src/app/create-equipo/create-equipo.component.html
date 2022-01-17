@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <mat-card>
+        <div class="align">
+            <mat-card-title>{{title}}</mat-card-title>
+        </div>
+        <mat-card-subtitle>{{description}}</mat-card-subtitle>
+        <mat-card-content>
+          <span class="align" color="warn" *ngIf="submitted && crearEquipos.invalid"> TODOS LOS CAMPOS SON REQUERIDOS</span>
+            <form [formGroup] = "crearEquipos" (ngSubmit) = "addUpdateEquipo()">
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre del Equipo</mat-label>
+                    <textarea matInput formControlName="nombre" placeholder="Ej. Hololens"></textarea>
+                  </mat-form-field>
+
+
+                  <div class="align">
+                    <mat-card-actions>
+                        <button type= "button" mat-raised-button color="primary" routerLink="/equipos">Volver</button>
+                        <button type="submit" mat-raised-button color="accent">{{button}}</button>
+                    </mat-card-actions>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

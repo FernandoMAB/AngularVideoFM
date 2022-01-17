@@ -8,12 +8,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class EquiposService {
 
   constructor(private firestore: AngularFirestore) { }
+
+
   addEquipo(equipo: any): Promise<any>{
     return this.firestore.collection('equipos').add(equipo);
   }
 
   getEquipos(): Observable <any>{
-    return this.firestore.collection('equipos', ref =>ref.orderBy('nombreE','asc')).snapshotChanges();
+    return this.firestore.collection('equipos', ref =>ref.orderBy('nombre','asc')).snapshotChanges();
   }
   deleteEquipo(id: string): Promise <any> {
     return this.firestore.collection('equipos').doc(id).delete();

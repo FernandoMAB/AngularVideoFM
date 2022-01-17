@@ -1,1 +1,65 @@
 <app-navbar></app-navbar>
+<div class="demo-button-container">
+    <div>
+      <h2 class="text-center">
+        <strong>
+          Lista de Préstamos
+        </strong>
+        </h2>
+    </div>
+      <button mat-stroked-button color="primary" class="demo-button" routerLink="/create-prestamo" title="Ingresar un nuevo prestamo">
+        Ingresar un préstamo
+      </button>
+    </div>
+    <h3 *ngIf="prestamosArray.length==0" class="align">No existen equipos registados</h3>
+    <mat-table *ngIf="prestamosArray.length>0" [dataSource]="prestamosArray" class="mat-elevation-z8">
+        <!-- First Name Column -->
+        <ng-container matColumnDef="fechaIni">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Inicio </mat-header-cell>
+          <mat-cell *matCellDef="let prestamo"> {{prestamo.fechaIni| date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+      
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="fechaFin">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Fin </mat-header-cell>
+          <mat-cell *matCellDef="let prestamo"> {{prestamo.fechaFin| date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaEntrega">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Entrega </mat-header-cell>
+          <mat-cell  *matCellDef="let prestamo"> {{prestamo.fechaEntrega }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="usuario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
+          <mat-cell  *matCellDef="let prestamo"> {{prestamo.usuario }} </mat-cell>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+          <mat-cell *matCellDef="let prestamo"> {{prestamo.estado}} </mat-cell>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="equipo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Equipo </mat-header-cell>
+          <mat-cell *matCellDef="let prestamo"> {{prestamo.equipo}} </mat-cell>
+        </ng-container>
+      
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Acción </mat-header-cell>
+            <mat-cell class="example-button-row" *matCellDef="let prestamo"> 
+                <button mat-raised-button color="primary"  [routerLink] = "['/edit-prestamo/',prestamo.id]" title="Editar">
+                    <mat-icon >edit</mat-icon>
+                    </button>
+                <button (click)="deletePrestamos(prestamo.id)" mat-raised-button color="warn" title="Eliminar">
+                    <mat-icon>delete</mat-icon>
+                    </button>  
+            </mat-cell>
+          </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>

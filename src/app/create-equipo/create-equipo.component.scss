@@ -1,0 +1,25 @@
+.align {
+    padding: 3.8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .container{
+    width: 70%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    margin: auto;
+  }
+  

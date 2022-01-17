@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <mat-card>
+        <div class="align">
+            <mat-card-title>{{title}}</mat-card-title>
+        </div>
+        <mat-card-subtitle>{{description}}</mat-card-subtitle>
+        <mat-card-content>
+          <span class="align" color="warn" *ngIf="submitted && crearPrestamo.invalid"> TODOS LOS CAMPOS SON REQUERIDOS</span>
+            <form [formGroup] = "crearPrestamo" (ngSubmit) = "addUpdatePrestamo()">
+
+                  <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Ingrese la fecha de inicio y fin del préstamo</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate formControlName="fechaIni" placeholder="Fecha Inicio">
+                      <input matEndDate formControlName="fechaFin" placeholder="Fecha Fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  
+                    <mat-error *ngIf="crearPrestamo.controls.fechaIni.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="crearPrestamo.controls.fechaFin.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="fill" >
+                    <mat-label>Fecha de Entega</mat-label>
+                    <input matInput formControlName="fechaEntrega" [matDatepicker]="picker2" placeholder="MM/dd/yyyy">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Usuario</mat-label>
+                    <textarea matInput formControlName="usuario" placeholder="Ej. Julian"></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="estado">
+                      <mat-option value="Prestado">Prestado</mat-option>
+                      <mat-option value="Devuelto">Devuelto</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Equipo</mat-label>
+                    <mat-select formControlName="equipo">
+                        <div *ngFor="let equipo of equiposArray">
+                            <mat-option value="{{equipo.id}}">{{equipo.nombre}}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+
+
+                  <div class="align">
+                    <mat-card-actions>
+                        <button type= "button" mat-raised-button color="primary" routerLink="/prestamos">Volver</button>
+                        <button type="submit" mat-raised-button color="accent">{{button}}</button>
+                    </mat-card-actions>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
