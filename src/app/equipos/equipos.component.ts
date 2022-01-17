@@ -12,20 +12,20 @@ export class EquiposComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEquipos();
+    console.log(this.equiposArray)
   }
 
   getEquipos(){
     this._equipoService.getEquipos().subscribe(data =>{
       this.equiposArray = [];
       data.forEach((element:any) => {
-        //console.log(element.payload.doc.id);//Obtener el ID
-        //console.log(element.payload.doc.data())//Obtenemos toda la informacion
         this.equiposArray.push({
           id: element.payload.doc.id,
           nombre: element.payload.doc.data().nombre,
           creationDate: element.payload.doc.data().creationDate,
           modificationDate: element.payload.doc.data().modificationDate
         })
+        console.log(this.equiposArray)
       });
     })
   }

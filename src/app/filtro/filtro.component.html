@@ -3,11 +3,60 @@
     <div>
       <h2 class="text-center">
         <strong>
-          Calcular Multas
+          Cálculo Multas
         </strong>
         </h2>
     </div>
-      <button mat-stroked-button color="primary" class="demo-button" routerLink="/create-prestamo" title="Ingresar un nuevo prestamo">
-        Ingresar un prestamo
-      </button>
+      <form [formGroup] = "multas" (ngSubmit) = "doMultas()" class="demo-button">
+        
+        <mat-form-field appearance="fill" >
+            <mat-label>Ingrese un rango de fechas</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="StartDate" placeholder="Fecha Inicio">
+              <input matEndDate formControlName="EndDate" placeholder="Fecha Fin">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          
+            <mat-error *ngIf="multas.controls.StartDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="multas.controls.EndDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+        
+          <mat-card-actions class="child">
+            <button class = "button" type="submit" mat-raised-button color="accent">Calcular</button>
+        </mat-card-actions>
+    </form>
     </div>
+
+    <h3 *ngIf="multasArray.length==0" class="align">No existen multas en estas fechas</h3>
+    <mat-table  [dataSource]="multasArray" class="mat-elevation-z8">
+        <!-- First equipo Column  *ngIf="multasArray.length>0"-->
+        <ng-container matColumnDef="equipo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Equipo </mat-header-cell>
+          <mat-cell *matCellDef="let multa"> {{multa.equipo}} </mat-cell>
+        </ng-container>
+      
+        <!-- Last usuario Column -->
+        <ng-container matColumnDef="usuario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
+          <mat-cell *matCellDef="let multa"> {{multa.usuario}} </mat-cell>
+        </ng-container>
+
+        <!-- Last dias Column -->
+        <ng-container matColumnDef="dias">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Días Cobrados </mat-header-cell>
+          <mat-cell *matCellDef="let multa"> {{multa.dias}} </mat-cell>
+        </ng-container>
+      
+        <!-- Last multa Column -->
+        <ng-container matColumnDef="multa">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Multa a pagar </mat-header-cell>
+          <mat-cell *matCellDef="let multa"> {{multa.multa}} </mat-cell>
+        </ng-container>
+      
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      
