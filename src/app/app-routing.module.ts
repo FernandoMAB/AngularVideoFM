@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateEquipoComponent } from './create-equipo/create-equipo.component';
 import { CreatePrestamosComponent } from './create-prestamos/create-prestamos.component';
 import { EquiposComponent } from './equipos/equipos.component';
+import { FiltroVideoComponent } from './filtro-video/filtro-video.component';
 import { FiltroComponent } from './filtro/filtro.component';
 import { PrestamosComponent } from './prestamos/prestamos.component';
 
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'edit-prestamo/:id',
     component: CreatePrestamosComponent
+  },
+  {
+    path: 'filto-video',
+    component: FiltroVideoComponent
   },
 
 ];

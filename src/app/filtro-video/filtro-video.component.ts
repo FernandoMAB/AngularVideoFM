@@ -1,54 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { multaInt } from '../filtro/filtro.component';
 import { EquiposService } from '../servicesFirebase/equipos.service';
 import { PrestamoService } from '../servicesFirebase/prestamo.service';
 
 @Component({
-  selector: 'app-filtro',
-  templateUrl: './filtro.component.html',
-  styleUrls: ['./filtro.component.scss']
+  selector: 'app-filtro-video',
+  templateUrl: './filtro-video.component.html',
+  styleUrls: ['./filtro-video.component.scss']
 })
-export class FiltroComponent implements OnInit {
+export class FiltroVideoComponent implements OnInit {
 
-  multas: FormGroup;
-  multasArray :multaInt [] =  [];
-  equiposArray :any [] =  [];
+  multasVideo: FormGroup;
   prestamosArray :any [] =  [];
+  equiposArray :any [] =  [];
+  multasArray :multaInt [] =  [];
   multaPorDia : number = 5;
   submitted = false;
 
-  constructor(private fb: FormBuilder,private _equipoService: EquiposService,private _prestamoService: PrestamoService) { 
-    this.multas = this.fb.group({
-      StartDate: ['',Validators.required],
-      EndDate: ['',Validators.required],
-      
-    })
-  }
+
+
+  constructor(private fb: FormBuilder,private _prestamoService: PrestamoService,private _equipoService: EquiposService) {
+      this.multasVideo = this.fb.group({
+        StartDate: ['',Validators.required],
+        EndDate: ['',Validators.required],
+      })
+   }
 
   ngOnInit(): void {
     this.getPrestamos();
     this.getEquipos();
   }
-
-  doMultas(){
+  doMultasVideo(){
     this.submitted = true;
-    if(this.multas.invalid){
+    if(this.multasVideo.invalid){
       return;
     }
     this.multasArray = [];
-    var todayDate = new Date();
-    
-    this.prestamosArray.forEach(element => {
 
+    var todayDate = new Date();
+
+    this.prestamosArray.forEach(element => {
       if(element.fechaEntrega == ''){
 
         this.equiposArray.forEach(elementE => {
 
-          if(element.equipo == elementE.id && element.fechaIni >= this.multas.value.StartDate && element.fechaFin <= this.multas.value.EndDate && element.estado == 'Prestado'){
-
+          if(element.equipo == elementE.id && element.fechaIni >= this.multasVideo.value.StartDate && element.fechaFin <= this.multasVideo.value.EndDate && element.estado == 'Prestado'){
             var diff = this.calcularDias(element.fechaFin,todayDate);
             var multaCalculada = diff * this.multaPorDia;
-            if(diff > 0){
+            if(diff>0){
               this.multasArray.push({
                 equipo: elementE.nombre,
                 usuario: element.usuario,
@@ -62,14 +62,13 @@ export class FiltroComponent implements OnInit {
     });
   }
 
-  calcularDias(finPrestamo:Date,hoy:Date){
+  calcularDias(finPrestamo:Date, hoy:Date){
     let days = hoy.getTime() - finPrestamo.getTime();
     days = days/(1000*60*60*24);
     let diferenciaDias = Math.trunc(days);
 
     return Number(diferenciaDias);
   }
-  
 
   getPrestamos(){
     this._prestamoService.getPrestamos().subscribe(data =>{
@@ -101,11 +100,4 @@ export class FiltroComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['equipo', 'usuario','dias','multa'];
-}
-
-export interface multaInt{
-  equipo: string,
-  usuario: string,
-  dias: number,
-  multa: number,
 }

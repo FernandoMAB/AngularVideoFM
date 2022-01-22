@@ -28,6 +28,7 @@ import { PrestamosComponent } from './prestamos/prestamos.component';
 import { FiltroComponent } from './filtro/filtro.component';
 import { CreateEquipoComponent } from './create-equipo/create-equipo.component';
 import { CreatePrestamosComponent } from './create-prestamos/create-prestamos.component';
+import { FiltroVideoComponent } from './filtro-video/filtro-video.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CreatePrestamosComponent } from './create-prestamos/create-prestamos.co
     PrestamosComponent,
     FiltroComponent,
     CreateEquipoComponent,
-    CreatePrestamosComponent
+    CreatePrestamosComponent,
+    FiltroVideoComponent
   ],
   imports: [
     BrowserModule,
