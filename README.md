@@ -6,7 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Angular 13 tutorial using firebase: Calculation of fines after equipment loan
 
 ## Goal: 
-	Make a query of fines for equipment not returned after the end of the loan, up to the current date. $5 dollars will be charged for each day, relating the tables of <Equipos> y <Prestamos>.
+  Make a query of fines for equipment not returned after the end of the loan, up to the current date. 
+  $5 dollars will be charged for each day, relating the tables of <Equipos> y <Prestamos>.
  
 ## Requirements: 
  - The MVC or data in the database
