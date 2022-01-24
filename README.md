@@ -27,7 +27,7 @@ https://github.com/FernandoMAB/AngularVideoFM
 https://boring-ptolemy-47202f.netlify.app/
 
  ##Contact:
-Fernando A. Mejía B.
-fernando.mejia@udla.edu.ec
-fersis2009@hotmail.com
-https://github.com/FernandoMAB
+ - Fernando A. Mejía B.
+ - fernando.mejia@udla.edu.ec
+ - fersis2009@hotmail.com
+ - https://github.com/FernandoMAB
